@@ -44,10 +44,10 @@ class Player {
 
 // the platform class this creates a singular platform and colors it blue
 class Platform {
-	constructor () {
+	constructor ({x, y}) {
 		this.position = {
-			x: 200,
-			y: 100
+			x,
+			y
 		}
 		this.width = 200,
 		this.height = 20
@@ -61,7 +61,7 @@ class Platform {
 
 //creating varibles for the player and platform class
 const player = new Player()
-const platforms = [new Platform()]
+const platforms = [new Platform({x: 200, y: 100}), new Platform({x: 500, y: 200})]
 
 
 // const vars for the state of the right and left keys
@@ -73,6 +73,9 @@ const keys = {
 		pressed: false
 	}
 }
+
+//tracking the total distance covered
+let scrollOffset = 0; 
 
 // the function that handles the collision and player movement this 
 function animate() {
@@ -92,20 +95,29 @@ function animate() {
 		player.velocity.x = 0
 		
 		if (keys.right.pressed) {
+			scrollOffset += 5
 			platforms.forEach(platform=> {
 				platform.position.x -= 5
 			})
 		} else if (keys.left.pressed) {
+			scrollOffset -= 5
 			platforms.forEach(platform=> {
 				platform.position.x += 5
 			})
 		}
 	}
+	
+	console.log(scrollOffset)
+	
 	platforms.forEach(platform=> {
 		if (player.position.y  + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
 			player.velocity.y = 0
 		}
 	})
+	
+	if (scrollOffset > 3000) {
+		console.log('youve won!')
+	}
 }
 
 animate()
