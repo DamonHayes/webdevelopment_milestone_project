@@ -46,14 +46,14 @@ class Player {
 
 // the platform class this creates a singular platform and colors it blue
 class Platform {
-	constructor ({x, y}) {
+	constructor ({x, y, w, h}) {
 		this.position = {
 			x,
-			y,
+			y
 		}
 		
-		this.width = 200,
-		this.height = 50
+		this.width = w,
+		this.height = h
 		
 		
 	}
@@ -66,7 +66,7 @@ class Platform {
 
 //creating varibles for the player and platform class
 const player = new Player()
-const platforms = [new Platform({x: 200, y: 100, image}), new Platform({x: 500, y: 200, image})]
+const platforms = [new Platform({x: 0, y: (canvas.height - 100), w:3001, h:100 }), new Platform({x: 500, y:(canvas.height-150), w:500, h:100})]
 
 
 // const vars for the state of the right and left keys
@@ -118,6 +118,7 @@ function animate() {
 		if (player.position.y  + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
 			player.velocity.y = 0
 		}
+		
 	})
 	
 	if (scrollOffset > 3000) {
