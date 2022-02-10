@@ -28,8 +28,10 @@ class Player {
 	
 	// this is the drawling of the player
 	draw() {
-		context.fillStyle = "red"
+	
+		context.fillStyle = "purple"
 		context.fillRect(this.position.x, this.position.y, this.width, this.height)
+		
 	}
 	
 	// this is called every frame it updates the players position and velocity
@@ -59,14 +61,14 @@ class Platform {
 	}
 	
 	draw() {
-		context.fillStyle = "blue"
+		context.fillStyle = "green"
 		context.fillRect(this.position.x, this.position.y, this.width, this.height)
 	}
 }
 
 //creating varibles for the player and platform class
 const player = new Player()
-const platforms = [new Platform({x: 0, y: (canvas.height - 100), w:3001, h:100 }), new Platform({x: 500, y:(canvas.height-150), w:500, h:100})]
+const platforms = [new Platform({x: 0, y: (canvas.height - 100), w:1500, h:100 }), new Platform({x: 500, y:(canvas.height-150), w:500, h:100}), new Platform({x: 1700, y:(canvas.height-100), w:1200, h:100}), new Platform({x: 1550, y:(canvas.height - 150), w:100 ,h: 10}), new Platform({x: 2900, y:(canvas.height-100), w: 500, h: 100})]
 
 
 // const vars for the state of the right and left keys
@@ -122,7 +124,7 @@ function animate() {
 	})
 	
 	if (scrollOffset > 3000) {
-		
+		window.alert("YOU'VE WON")
 		console.log('youve won!')
 	}
 }

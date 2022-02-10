@@ -3,6 +3,10 @@ body{
 	background-color: black;
 }
 
+canvas{
+	background-image: '.assets/background.jpg'
+}
+
 img {
 	display: none;
 }
