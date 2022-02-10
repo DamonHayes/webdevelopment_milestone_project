@@ -1,4 +1,4 @@
-import platform from './assets/grassBlock.png'
+const image = document.getElementById('ground')
 
 // consts for the canvas and what is inside the canvas
 const canvas = document.getElementById('canvas');
@@ -49,21 +49,24 @@ class Platform {
 	constructor ({x, y}) {
 		this.position = {
 			x,
-			y
+			y,
 		}
+		
 		this.width = 200,
-		this.height = 20
+		this.height = 50
+		
+		
 	}
 	
 	draw() {
-		context.fillStyle = 'blue'
+		context.fillStyle = "blue"
 		context.fillRect(this.position.x, this.position.y, this.width, this.height)
 	}
 }
 
 //creating varibles for the player and platform class
 const player = new Player()
-const platforms = [new Platform({x: 200, y: 100}), new Platform({x: 500, y: 200})]
+const platforms = [new Platform({x: 200, y: 100, image}), new Platform({x: 500, y: 200, image})]
 
 
 // const vars for the state of the right and left keys
@@ -83,10 +86,10 @@ let scrollOffset = 0;
 function animate() {
 	requestAnimationFrame(animate)
 	context.clearRect(0, 0, canvas.width, canvas.height)
-	player.update()
 	platforms.forEach(platform=> {
 		platform.draw()
 	})
+	player.update()
 	
 	
 	if (keys.right.pressed && player.position.x < 401) {
@@ -118,6 +121,7 @@ function animate() {
 	})
 	
 	if (scrollOffset > 3000) {
+		
 		console.log('youve won!')
 	}
 }
@@ -139,7 +143,7 @@ window.addEventListener('keydown', ({keyCode}) => {
 			keys.right.pressed = true;
 		break
 		case 87 || 38:
-			player.velocity.y -= 10
+			player.velocity.y = -10
 		break
 	}
 })
